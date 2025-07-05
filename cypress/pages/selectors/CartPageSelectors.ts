@@ -17,7 +17,11 @@ export class CartPageSelectors {
   static readonly continueShoppingButton = '[data-test="continue-shopping"]'
   
   // Dynamic button selectors
-  static removeButton = (itemName: string) => `[data-test="remove-${itemName}"]`
+  static removeButton = (itemName: string) => {
+    // Try different formats for remove button selectors
+    const itemId = itemName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')
+    return `[data-test="remove-${itemId}"]`
+  }
   
   // Cart badge selectors
   static readonly shoppingCartLink = '[data-test="shopping-cart-link"]'
