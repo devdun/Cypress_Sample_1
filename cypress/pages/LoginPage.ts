@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Login Page Object Model
+ * @author Devdun
+ * @created 2025
+ * @description Page Object Model for SauceDemo login functionality with separated selectors architecture
+ */
+
 import { LoginPageSelectors } from './selectors/LoginPageSelectors'
 
 export class LoginPage {

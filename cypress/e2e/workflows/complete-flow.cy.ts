@@ -1,3 +1,10 @@
+/**
+ * @fileoverview End-to-End complete shopping flow tests
+ * @author Devdun
+ * @created 2025
+ * @description Full user journey tests from login to order completion, including problem user scenarios
+ */
+
 /// <reference types="cypress" />
 
 import { LoginPage } from '../../pages/LoginPage'

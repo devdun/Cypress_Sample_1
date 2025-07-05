@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Login functionality tests for SauceDemo
+ * @author Devdun
+ * @created 2025
+ * @description Comprehensive login tests covering successful scenarios, validation errors, and browser compatibility
+ */
+
 /// <reference types="cypress" />
 
 import { LoginPage } from '../../pages/LoginPage'

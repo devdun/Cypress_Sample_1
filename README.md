@@ -2,6 +2,12 @@
 
 A comprehensive end-to-end testing framework built with Cypress, TypeScript, and Page Object Model for testing the SauceDemo website.
 
+---
+**Author:** Devdun  
+**Created:** 2025  
+**Repository:** https://github.com/devdun/Cypress_Sample_1  
+---
+
 ## 🚀 Features
 
 - **TypeScript Support**: Full TypeScript integration for better code maintainability

@@ -78,7 +78,18 @@
     "page-object-model",
     "saucedemo"
   ],
-  "author": "Devdun",
+  "author": {
+    "name": "Devdun",
+    "url": "https://github.com/devdun"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devdun/Cypress_Sample_1.git"
+  },
+  "homepage": "https://github.com/devdun/Cypress_Sample_1#readme",
+  "bugs": {
+    "url": "https://github.com/devdun/Cypress_Sample_1/issues"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^24.0.10",
