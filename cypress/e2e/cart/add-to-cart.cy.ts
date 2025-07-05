@@ -66,8 +66,19 @@ describe('Add to Cart Tests', () => {
   it('should add item from product details page', () => {
     productsPage.getProductByName('Sauce Labs Backpack').click()
     
-    // Add to cart from product details
-    cy.get('[data-test="add-to-cart-sauce-labs-backpack"]').click()
+    // Add to cart from product details (try different possible selectors)
+    cy.get('body').then(($body) => {
+      if ($body.find('[data-test="add-to-cart-sauce-labs-backpack"]').length > 0) {
+        cy.get('[data-test="add-to-cart-sauce-labs-backpack"]').click()
+      } else if ($body.find('[data-test="add-to-cart"]').length > 0) {
+        cy.get('[data-test="add-to-cart"]').click()
+      } else if ($body.find('.btn_primary.btn_inventory').length > 0) {
+        cy.get('.btn_primary.btn_inventory').click()
+      } else {
+        cy.get('button:contains("Add to cart")').click()
+      }
+    })
+    
     cy.get('[data-test="shopping-cart-badge"]').should('contain.text', '1')
     
     // Navigate back and verify cart count

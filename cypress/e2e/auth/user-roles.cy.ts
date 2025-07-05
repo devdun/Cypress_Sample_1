@@ -141,7 +141,8 @@ describe('User Roles and Special Behaviors', () => {
       productsPage.validateProductsPageIsDisplayed()
       productsPage.addItemToCart('sauce-labs-backpack')
       
-      cartPage.visit()
+      // Navigate to cart using UI instead of direct URL
+      productsPage.clickShoppingCart()
       cartPage.validateCartPageIsDisplayed()
       
       // Navigate back to products
