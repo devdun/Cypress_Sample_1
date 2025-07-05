@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020", "dom"],
+    "outDir": "./dist",
+    "rootDir": "./cypress",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["cypress/*"],
+      "@pages/*": ["cypress/pages/*"],
+      "@selectors/*": ["cypress/pages/selectors/*"],
+      "@fixtures/*": ["cypress/fixtures/*"],
+      "@utils/*": ["cypress/utils/*"],
+      "@support/*": ["cypress/support/*"]
+    },
+    "types": ["cypress"]
+  },
+  "include": [
+    "cypress/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+} 
