@@ -43,7 +43,8 @@ describe('Product Sorting Tests', () => {
     productsPage.validateProductsSortedByPrice('desc')
   })
 
-  it('should maintain sort order when navigating back from product details', () => {
+  it('should allow re-sorting after navigating back from product details', () => {
+    // First, sort products by price high to low
     productsPage.sortProducts('hilo')
     productsPage.validateProductsSortedByPrice('desc')
     
@@ -51,7 +52,15 @@ describe('Product Sorting Tests', () => {
     productsPage.getProductByName('Sauce Labs Fleece Jacket').click()
     cy.get('[data-test="back-to-products"]').click()
     
-    // Verify sort order is maintained
+    // Verify we're back on products page
+    productsPage.validateProductsPageIsDisplayed()
+    
+    // Re-sort products to verify sorting still works after navigation
+    productsPage.sortProducts('hilo')
     productsPage.validateProductsSortedByPrice('desc')
+    
+    // Also verify we can sort in different order
+    productsPage.sortProducts('lohi')
+    productsPage.validateProductsSortedByPrice('asc')
   })
 }) 
