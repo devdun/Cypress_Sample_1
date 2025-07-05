@@ -78,7 +78,7 @@
     "page-object-model",
     "saucedemo"
   ],
-  "author": "devdun",
+  "author": "Devdun",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^24.0.10",
