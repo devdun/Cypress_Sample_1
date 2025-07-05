@@ -1,0 +1,233 @@
+{
+  "auth": {
+    "success": {
+      "statusCode": 200,
+      "body": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdGFuZGFyZF91c2VyIiwiaWF0IjoxNTYzMzA5OTUzLCJleHAiOjE1NjMzMTM1NTN9.test",
+        "user": {
+          "id": "user123",
+          "username": "standard_user",
+          "role": "customer",
+          "preferences": {
+            "language": "en",
+            "currency": "USD"
+          }
+        },
+        "sessionId": "sess_123456789"
+      }
+    },
+    "invalidCredentials": {
+      "statusCode": 401,
+      "body": {
+        "error": "Invalid credentials",
+        "message": "Username and password do not match",
+        "code": "AUTH_INVALID_CREDENTIALS"
+      }
+    },
+    "lockedOut": {
+      "statusCode": 403,
+      "body": {
+        "error": "Account locked",
+        "message": "Sorry, this user has been locked out.",
+        "code": "AUTH_LOCKED_OUT"
+      }
+    },
+    "serverError": {
+      "statusCode": 500,
+      "body": {
+        "error": "Internal server error",
+        "message": "Something went wrong on our end",
+        "code": "SERVER_ERROR"
+      }
+    }
+  },
+  "products": {
+    "success": {
+      "statusCode": 200,
+      "body": {
+        "products": [
+          {
+            "id": "sauce-labs-backpack",
+            "name": "Sauce Labs Backpack",
+            "price": 29.99,
+            "image": "/static/media/sauce-backpack-1200x1500.0a0b85a3.jpg",
+            "inStock": true,
+            "inventory": 25
+          },
+          {
+            "id": "sauce-labs-bike-light",
+            "name": "Sauce Labs Bike Light",
+            "price": 9.99,
+            "image": "/static/media/bike-light-1200x1500.37c843b0.jpg",
+            "inStock": true,
+            "inventory": 15
+          }
+        ],
+        "totalCount": 6,
+        "page": 1,
+        "pageSize": 10
+      }
+    },
+    "emptyInventory": {
+      "statusCode": 200,
+      "body": {
+        "products": [],
+        "totalCount": 0,
+        "page": 1,
+        "pageSize": 10,
+        "message": "No products available"
+      }
+    },
+    "serverError": {
+      "statusCode": 500,
+      "body": {
+        "error": "Failed to load products",
+        "message": "Unable to retrieve product information",
+        "code": "PRODUCTS_SERVER_ERROR"
+      }
+    }
+  },
+  "cart": {
+    "addItem": {
+      "success": {
+        "statusCode": 200,
+        "body": {
+          "message": "Item added to cart",
+          "cart": {
+            "items": [
+              {
+                "id": "sauce-labs-backpack",
+                "name": "Sauce Labs Backpack",
+                "price": 29.99,
+                "quantity": 1
+              }
+            ],
+            "itemCount": 1,
+            "subtotal": 29.99
+          }
+        }
+      },
+      "outOfStock": {
+        "statusCode": 409,
+        "body": {
+          "error": "Out of stock",
+          "message": "This item is currently out of stock",
+          "code": "CART_OUT_OF_STOCK"
+        }
+      },
+      "serverError": {
+        "statusCode": 500,
+        "body": {
+          "error": "Failed to add item",
+          "message": "Unable to add item to cart",
+          "code": "CART_SERVER_ERROR"
+        }
+      }
+    },
+    "removeItem": {
+      "success": {
+        "statusCode": 200,
+        "body": {
+          "message": "Item removed from cart",
+          "cart": {
+            "items": [],
+            "itemCount": 0,
+            "subtotal": 0
+          }
+        }
+      }
+    },
+    "getCart": {
+      "success": {
+        "statusCode": 200,
+        "body": {
+          "items": [
+            {
+              "id": "sauce-labs-backpack",
+              "name": "Sauce Labs Backpack",
+              "price": 29.99,
+              "quantity": 1,
+              "image": "/static/media/sauce-backpack-1200x1500.0a0b85a3.jpg"
+            }
+          ],
+          "itemCount": 1,
+          "subtotal": 29.99,
+          "tax": 2.40,
+          "total": 32.39
+        }
+      },
+      "empty": {
+        "statusCode": 200,
+        "body": {
+          "items": [],
+          "itemCount": 0,
+          "subtotal": 0,
+          "tax": 0,
+          "total": 0
+        }
+      }
+    }
+  },
+  "checkout": {
+    "success": {
+      "statusCode": 200,
+      "body": {
+        "orderId": "ORDER123456",
+        "status": "confirmed",
+        "message": "Thank you for your order!",
+        "total": 32.39,
+        "estimatedDelivery": "2024-01-15",
+        "trackingNumber": "TRK123456789"
+      }
+    },
+    "paymentError": {
+      "statusCode": 402,
+      "body": {
+        "error": "Payment failed",
+        "message": "Your payment could not be processed",
+        "code": "PAYMENT_FAILED"
+      }
+    },
+    "validationError": {
+      "statusCode": 400,
+      "body": {
+        "error": "Validation failed",
+        "message": "Please check your information",
+        "code": "VALIDATION_ERROR",
+        "details": {
+          "firstName": "First name is required",
+          "lastName": "Last name is required",
+          "zipCode": "ZIP code is required"
+        }
+      }
+    },
+    "serverError": {
+      "statusCode": 500,
+      "body": {
+        "error": "Checkout failed",
+        "message": "Unable to process your order",
+        "code": "CHECKOUT_SERVER_ERROR"
+      }
+    }
+  },
+  "networkScenarios": {
+    "slowResponse": {
+      "delay": 5000,
+      "statusCode": 200,
+      "body": {
+        "message": "Response delayed for testing"
+      }
+    },
+    "timeout": {
+      "forceNetworkError": true,
+      "error": "Request timeout"
+    },
+    "intermittentFailure": {
+      "throttleKbps": 100,
+      "statusCode": 503,
+      "body": {
+        "error": "Service temporarily unavailable"
+      }
+    }
+  }
+} 

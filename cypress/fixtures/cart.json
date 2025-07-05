@@ -1,0 +1,99 @@
+{
+  "cart": {
+    "empty": {
+      "items": [],
+      "itemCount": 0,
+      "subtotal": 0,
+      "tax": 0,
+      "total": 0
+    },
+    "singleItem": {
+      "items": [
+        {
+          "id": "sauce-labs-backpack",
+          "name": "Sauce Labs Backpack",
+          "price": 29.99,
+          "quantity": 1,
+          "image": "/static/media/sauce-backpack-1200x1500.0a0b85a3.jpg"
+        }
+      ],
+      "itemCount": 1,
+      "subtotal": 29.99,
+      "tax": 2.40,
+      "total": 32.39
+    },
+    "multipleItems": {
+      "items": [
+        {
+          "id": "sauce-labs-backpack",
+          "name": "Sauce Labs Backpack",
+          "price": 29.99,
+          "quantity": 2,
+          "image": "/static/media/sauce-backpack-1200x1500.0a0b85a3.jpg"
+        },
+        {
+          "id": "sauce-labs-bike-light",
+          "name": "Sauce Labs Bike Light",
+          "price": 9.99,
+          "quantity": 1,
+          "image": "/static/media/bike-light-1200x1500.37c843b0.jpg"
+        }
+      ],
+      "itemCount": 3,
+      "subtotal": 69.97,
+      "tax": 5.60,
+      "total": 75.57
+    },
+    "largeCart": {
+      "items": [
+        {
+          "id": "sauce-labs-backpack",
+          "name": "Sauce Labs Backpack",
+          "price": 29.99,
+          "quantity": 5,
+          "image": "/static/media/sauce-backpack-1200x1500.0a0b85a3.jpg"
+        },
+        {
+          "id": "sauce-labs-bike-light",
+          "name": "Sauce Labs Bike Light",
+          "price": 9.99,
+          "quantity": 3,
+          "image": "/static/media/bike-light-1200x1500.37c843b0.jpg"
+        },
+        {
+          "id": "sauce-labs-bolt-t-shirt",
+          "name": "Sauce Labs Bolt T-Shirt",
+          "price": 15.99,
+          "quantity": 2,
+          "image": "/static/media/bolt-shirt-1200x1500.c2599ac5.jpg"
+        }
+      ],
+      "itemCount": 10,
+      "subtotal": 211.91,
+      "tax": 16.95,
+      "total": 228.86
+    }
+  },
+  "mockScenarios": {
+    "serverError": {
+      "error": "Internal server error",
+      "statusCode": 500,
+      "message": "Unable to process cart request"
+    },
+    "networkTimeout": {
+      "error": "Request timeout",
+      "statusCode": 408,
+      "message": "Request took too long to complete"
+    },
+    "invalidItem": {
+      "error": "Invalid item",
+      "statusCode": 400,
+      "message": "The requested item is not available"
+    },
+    "outOfStock": {
+      "error": "Out of stock",
+      "statusCode": 409,
+      "message": "This item is currently out of stock"
+    }
+  }
+} 
