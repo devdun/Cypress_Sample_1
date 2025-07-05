@@ -27,7 +27,7 @@ describe('Checkout Flow Tests', () => {
       loginPage.login(testData.validUsers.standard_user.username, testData.validUsers.standard_user.password)
       productsPage.validateProductsPageIsDisplayed()
       productsPage.addItemToCart('sauce-labs-backpack')
-      cartPage.visit()
+      productsPage.clickShoppingCart()
       cartPage.clickCheckout()
     })
   })
@@ -125,7 +125,7 @@ describe('Checkout Flow Tests', () => {
     productsPage.addItemToCart('sauce-labs-bolt-t-shirt')
     
     // Go back to checkout
-    cartPage.visit()
+    productsPage.clickShoppingCart()
     cartPage.clickCheckout()
     
     // Complete checkout

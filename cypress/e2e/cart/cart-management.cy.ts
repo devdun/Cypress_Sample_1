@@ -27,7 +27,7 @@ describe('Cart Management Tests', () => {
   })
 
   it('should display empty cart message when cart is empty', () => {
-    cartPage.visit()
+    productsPage.clickShoppingCart()
     cartPage.validateCartPageIsDisplayed()
     cartPage.validateCartIsEmpty()
   })
@@ -39,7 +39,7 @@ describe('Cart Management Tests', () => {
     productsPage.validateCartItemCount(2)
     
     // Navigate to cart
-    cartPage.visit()
+    productsPage.clickShoppingCart()
     cartPage.validateCartHasItems()
     
     // Remove one item
@@ -55,7 +55,7 @@ describe('Cart Management Tests', () => {
   it('should continue shopping from cart page', () => {
     // Add item and go to cart
     productsPage.addItemToCart('sauce-labs-backpack')
-    cartPage.visit()
+    productsPage.clickShoppingCart()
     cartPage.validateCartPageIsDisplayed()
     
     // Continue shopping
@@ -66,7 +66,7 @@ describe('Cart Management Tests', () => {
   it('should proceed to checkout from cart', () => {
     // Add item and go to cart
     productsPage.addItemToCart('sauce-labs-backpack')
-    cartPage.visit()
+    productsPage.clickShoppingCart()
     cartPage.validateCartPageIsDisplayed()
     
     // Proceed to checkout
@@ -77,7 +77,7 @@ describe('Cart Management Tests', () => {
   it('should display correct item information in cart', () => {
     // Add specific item
     productsPage.addItemToCart('sauce-labs-backpack')
-    cartPage.visit()
+    productsPage.clickShoppingCart()
     
     // Verify item details
     cartPage.validateCartItemExists('Sauce Labs Backpack')
@@ -92,7 +92,7 @@ describe('Cart Management Tests', () => {
     productsPage.validateCartItemCount(2)
     
     // Navigate to cart and back
-    cartPage.visit()
+    productsPage.clickShoppingCart()
     cartPage.validateCartHasItems()
     cartPage.clickContinueShopping()
     
@@ -100,7 +100,7 @@ describe('Cart Management Tests', () => {
     productsPage.validateCartItemCount(2)
     
     // Navigate back to cart
-    cartPage.visit()
+    productsPage.clickShoppingCart()
     cartPage.validateCartItemExists('Sauce Labs Backpack')
     cartPage.validateCartItemExists('Sauce Labs Bike Light')
   })
@@ -121,7 +121,7 @@ describe('Cart Management Tests', () => {
     })
 
     // Navigate to cart and verify all items
-    cartPage.visit()
+    productsPage.clickShoppingCart()
     cartPage.validateCartHasItems()
     cartPage.getAllCartItems().should('have.length', 6)
   })
