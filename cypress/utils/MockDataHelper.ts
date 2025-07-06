@@ -41,27 +41,27 @@ export class MockDataHelper {
     return {
       success: () => {
         cy.fixture('api-responses').then((responses) => {
-          cy.intercept('POST', this.ENDPOINTS.AUTH, responses.auth.success).as('authSuccess')
+          cy.intercept('POST', MockDataHelper.ENDPOINTS.AUTH, responses.auth.success).as('authSuccess')
         })
       },
       invalidCredentials: () => {
         cy.fixture('api-responses').then((responses) => {
-          cy.intercept('POST', this.ENDPOINTS.AUTH, responses.auth.invalidCredentials).as('authInvalid')
+          cy.intercept('POST', MockDataHelper.ENDPOINTS.AUTH, responses.auth.invalidCredentials).as('authInvalid')
         })
       },
       lockedOut: () => {
         cy.fixture('api-responses').then((responses) => {
-          cy.intercept('POST', this.ENDPOINTS.AUTH, responses.auth.lockedOut).as('authLocked')
+          cy.intercept('POST', MockDataHelper.ENDPOINTS.AUTH, responses.auth.lockedOut).as('authLocked')
         })
       },
       serverError: () => {
         cy.fixture('api-responses').then((responses) => {
-          cy.intercept('POST', this.ENDPOINTS.AUTH, responses.auth.serverError).as('authServerError')
+          cy.intercept('POST', MockDataHelper.ENDPOINTS.AUTH, responses.auth.serverError).as('authServerError')
         })
       },
       slowResponse: (delay: number = 3000) => {
         cy.fixture('api-responses').then((responses) => {
-          cy.intercept('POST', this.ENDPOINTS.AUTH, (req) => {
+          cy.intercept('POST', MockDataHelper.ENDPOINTS.AUTH, (req) => {
             setTimeout(() => {
               req.reply(responses.auth.success)
             }, delay)
@@ -82,7 +82,7 @@ export class MockDataHelper {
     return {
       success: () => {
         cy.fixture('products').then((products) => {
-          cy.intercept('GET', this.ENDPOINTS.PRODUCTS, {
+          cy.intercept('GET', MockDataHelper.ENDPOINTS.PRODUCTS, {
             statusCode: 200,
             body: products
           }).as('productsSuccess')
@@ -90,7 +90,7 @@ export class MockDataHelper {
       },
       emptyInventory: () => {
         cy.fixture('products').then((products) => {
-          cy.intercept('GET', this.ENDPOINTS.PRODUCTS, {
+          cy.intercept('GET', MockDataHelper.ENDPOINTS.PRODUCTS, {
             statusCode: 200,
             body: products.mockScenarios.emptyInventory
           }).as('productsEmpty')
@@ -98,18 +98,18 @@ export class MockDataHelper {
       },
       serverError: () => {
         cy.fixture('api-responses').then((responses) => {
-          cy.intercept('GET', this.ENDPOINTS.PRODUCTS, responses.products.serverError).as('productsServerError')
+          cy.intercept('GET', MockDataHelper.ENDPOINTS.PRODUCTS, responses.products.serverError).as('productsServerError')
         })
       },
       customProducts: (products: any[]) => {
-        cy.intercept('GET', this.ENDPOINTS.PRODUCTS, {
+        cy.intercept('GET', MockDataHelper.ENDPOINTS.PRODUCTS, {
           statusCode: 200,
           body: { products }
         }).as('productsCustom')
       },
       slowResponse: (delay: number = 3000) => {
         cy.fixture('products').then((products) => {
-          cy.intercept('GET', this.ENDPOINTS.PRODUCTS, (req) => {
+          cy.intercept('GET', MockDataHelper.ENDPOINTS.PRODUCTS, (req) => {
             setTimeout(() => {
               req.reply({
                 statusCode: 200,
@@ -160,7 +160,7 @@ export class MockDataHelper {
       },
       getCartEmpty: () => {
         cy.fixture('cart').then((cart) => {
-          cy.intercept('GET', this.ENDPOINTS.CART, {
+          cy.intercept('GET', MockDataHelper.ENDPOINTS.CART, {
             statusCode: 200,
             body: cart.cart.empty
           }).as('getCartEmpty')
@@ -168,7 +168,7 @@ export class MockDataHelper {
       },
       getCartWithItems: () => {
         cy.fixture('cart').then((cart) => {
-          cy.intercept('GET', this.ENDPOINTS.CART, {
+          cy.intercept('GET', MockDataHelper.ENDPOINTS.CART, {
             statusCode: 200,
             body: cart.cart.multipleItems
           }).as('getCartWithItems')
@@ -187,7 +187,7 @@ export class MockDataHelper {
       },
       slowResponse: (delay: number = 3000) => {
         cy.fixture('cart').then((cart) => {
-          cy.intercept('GET', this.ENDPOINTS.CART, (req) => {
+          cy.intercept('GET', MockDataHelper.ENDPOINTS.CART, (req) => {
             setTimeout(() => {
               req.reply({
                 statusCode: 200,
@@ -211,27 +211,27 @@ export class MockDataHelper {
     return {
       success: () => {
         cy.fixture('api-responses').then((responses) => {
-          cy.intercept('POST', this.ENDPOINTS.CHECKOUT, responses.checkout.success).as('checkoutSuccess')
+          cy.intercept('POST', MockDataHelper.ENDPOINTS.CHECKOUT, responses.checkout.success).as('checkoutSuccess')
         })
       },
       paymentError: () => {
         cy.fixture('api-responses').then((responses) => {
-          cy.intercept('POST', this.ENDPOINTS.CHECKOUT, responses.checkout.paymentError).as('checkoutPaymentError')
+          cy.intercept('POST', MockDataHelper.ENDPOINTS.CHECKOUT, responses.checkout.paymentError).as('checkoutPaymentError')
         })
       },
       validationError: () => {
         cy.fixture('api-responses').then((responses) => {
-          cy.intercept('POST', this.ENDPOINTS.CHECKOUT, responses.checkout.validationError).as('checkoutValidationError')
+          cy.intercept('POST', MockDataHelper.ENDPOINTS.CHECKOUT, responses.checkout.validationError).as('checkoutValidationError')
         })
       },
       serverError: () => {
         cy.fixture('api-responses').then((responses) => {
-          cy.intercept('POST', this.ENDPOINTS.CHECKOUT, responses.checkout.serverError).as('checkoutServerError')
+          cy.intercept('POST', MockDataHelper.ENDPOINTS.CHECKOUT, responses.checkout.serverError).as('checkoutServerError')
         })
       },
       slowResponse: (delay: number = 3000) => {
         cy.fixture('api-responses').then((responses) => {
-          cy.intercept('POST', this.ENDPOINTS.CHECKOUT, (req) => {
+          cy.intercept('POST', MockDataHelper.ENDPOINTS.CHECKOUT, (req) => {
             setTimeout(() => {
               req.reply(responses.checkout.success)
             }, delay)
