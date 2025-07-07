@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Test Data Helper - Utilities for Test Data Management
+ * @author Devdun K
+ * @created 2025
+ * @license MIT (Attribution Required)
+ * @description Comprehensive test data utilities for Cypress testing
+ * 
+ * This code is free to use but requires attribution to "Devdun K"
+ * Original repository: https://github.com/devdun/Cypress_Sample_1
+ */
+
 export class TestDataHelper {
   
   // User management utilities

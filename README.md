@@ -3,9 +3,43 @@
 A comprehensive end-to-end testing framework built with Cypress, TypeScript, and Page Object Model for testing the SauceDemo website.
 
 ---
-**Author:** Devdun  
+**Author:** Devdun K  
 **Created:** 2025  
+**License:** MIT (Attribution Required)  
 **Repository:** https://github.com/devdun/Cypress_Sample_1  
+---
+
+## 📄 License & Attribution
+
+**🆓 FREE TO USE** - This project is open source and free to use with attribution requirements.
+
+### ⚠️ **IMPORTANT**: Attribution is Required
+
+When using this code in your projects:
+- ✅ **Must include attribution** to "Devdun K" in your documentation
+- ✅ **Must maintain the LICENSE file** if redistributing
+- ✅ **Commercial use is permitted** with proper attribution
+- ✅ **Modifications are welcome** - just keep the attribution
+
+### 🙏 How to Give Credit
+
+**In your project documentation:**
+```
+This project uses Cypress testing framework examples created by Devdun K.
+Original repository: https://github.com/devdun/Cypress_Sample_1
+```
+
+**In code comments (for significant portions):**
+```typescript
+/**
+ * Cypress testing implementation inspired by Devdun K's framework
+ * Source: https://github.com/devdun/Cypress_Sample_1
+ */
+```
+
+### 📞 Questions about Licensing?
+Have questions about commercial use or licensing? Feel free to reach out!
+
 ---
 
 ## 🚀 Features

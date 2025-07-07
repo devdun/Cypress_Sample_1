@@ -1,7 +1,7 @@
 {
   "name": "cypress_devdun",
   "version": "1.0.0",
-  "description": "Cypress E2E testing project for SauceDemo website using TypeScript and Page Object Model",
+  "description": "Cypress E2E testing project for SauceDemo website using TypeScript and Page Object Model - Created by Devdun K",
   "main": "index.js",
   "scripts": {
     "cypress:open": "cypress open",
@@ -76,11 +76,15 @@
     "testing",
     "typescript",
     "page-object-model",
-    "saucedemo"
+    "saucedemo",
+    "test-automation",
+    "devdun",
+    "attribution-required"
   ],
   "author": {
-    "name": "Devdun",
-    "url": "https://github.com/devdun"
+    "name": "Devdun K",
+    "url": "https://github.com/devdun",
+    "email": "devdun.contact@gmail.com"
   },
   "repository": {
     "type": "git",
@@ -90,7 +94,7 @@
   "bugs": {
     "url": "https://github.com/devdun/Cypress_Sample_1/issues"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^24.0.10",
     "@typescript-eslint/eslint-plugin": "^8.35.1",

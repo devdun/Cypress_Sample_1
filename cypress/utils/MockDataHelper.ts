@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Mock Data Helper - Advanced Cypress API Mocking Utilities
+ * @author Devdun K
+ * @created 2025
+ * @license MIT (Attribution Required)
+ * @description Comprehensive mocking utilities for Cypress testing with cy.intercept()
+ * 
+ * This code is free to use but requires attribution to "Devdun K"
+ * Original repository: https://github.com/devdun/Cypress_Sample_1
+ */
+
 /// <reference types="cypress" />
 
 export class MockDataHelper {

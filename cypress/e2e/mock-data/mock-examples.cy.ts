@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Mock Data Examples - Comprehensive Cypress Mocking Demonstrations
+ * @author Devdun K
+ * @created 2025
+ * @license MIT (Attribution Required)
+ * @description Advanced examples of mocking techniques in Cypress testing
+ * 
+ * This code is free to use but requires attribution to "Devdun K"
+ * Original repository: https://github.com/devdun/Cypress_Sample_1
+ */
+
 /// <reference types="cypress" />
 
 import { LoginPage } from '../../pages/LoginPage'
