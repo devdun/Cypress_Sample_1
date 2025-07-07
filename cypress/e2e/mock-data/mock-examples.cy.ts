@@ -143,6 +143,10 @@ describe('Mock Data Examples', () => {
       
       productsPage.validateProductsPageIsDisplayed()
       
+      // Verify mock data structure
+      expect(mockProductData.name).to.equal('Custom Test Product')
+      expect(mockProductData.price).to.equal(49.99)
+      
       // Verify we can work with real products
       productsPage.validateProductExists('Sauce Labs Backpack')
       productsPage.addItemToCart('sauce-labs-backpack')
