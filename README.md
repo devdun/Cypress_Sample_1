@@ -56,6 +56,198 @@ Have questions about commercial use or licensing? Feel free to reach out!
 - **Detailed Reporting**: Screenshots, videos, and detailed test reports
 - **CI/CD Ready**: Configured for continuous integration
 
+## 🏗️ Architecture Overview
+
+The following diagram illustrates the comprehensive architecture of this Cypress E2E testing framework, showing the layered design pattern and component relationships:
+
+```mermaid
+graph TD
+    %% Main Architecture Overview
+    subgraph "🏗️ Cypress E2E Testing Framework Architecture"
+        
+        %% Test Layer
+        subgraph "🎯 Test Layer"
+            AUTH["🔐 Authentication Tests<br/>login.cy.ts<br/>user-roles.cy.ts<br/>(27 tests)"]
+            PRODUCTS["🛍️ Product Tests<br/>product-display.cy.ts<br/>product-sorting.cy.ts<br/>(11 tests)"]
+            CART["🛒 Cart Tests<br/>add-to-cart.cy.ts<br/>cart-management.cy.ts<br/>(14 tests)"]
+            CHECKOUT["💳 Checkout Tests<br/>checkout-flow.cy.ts<br/>(9 tests)"]
+            WORKFLOWS["🔄 Workflow Tests<br/>complete-flow.cy.ts<br/>navigation.cy.ts<br/>(20 tests)"]
+            MOCK["🎭 Mock Data Tests<br/>mock-examples.cy.ts<br/>(26 tests)"]
+        end
+        
+        %% Page Object Layer
+        subgraph "📄 Page Object Model Layer"
+            LOGIN_PAGE["🔐 LoginPage.ts<br/>• login()<br/>• validateError()<br/>• validateLockedOut()"]
+            PRODUCTS_PAGE["🛍️ ProductsPage.ts<br/>• sortProducts()<br/>• addToCart()<br/>• validateCount()"]
+            CART_PAGE["🛒 CartPage.ts<br/>• removeItem()<br/>• validateCartItem()<br/>• proceedToCheckout()"]
+            CHECKOUT_PAGE["💳 CheckoutPage.ts<br/>• fillForm()<br/>• validateSummary()<br/>• completeOrder()"]
+        end
+        
+        %% Selector Layer
+        subgraph "🎯 Selector Layer"
+            LOGIN_SEL["LoginPageSelectors.ts<br/>• usernameField<br/>• passwordField<br/>• loginButton<br/>• errorMessage"]
+            PRODUCTS_SEL["ProductsPageSelectors.ts<br/>• productGrid<br/>• sortDropdown<br/>• addToCartButton<br/>• shoppingCart"]
+            CART_SEL["CartPageSelectors.ts<br/>• cartItem<br/>• removeButton<br/>• checkoutButton<br/>• itemQuantity"]
+            CHECKOUT_SEL["CheckoutPageSelectors.ts<br/>• firstNameField<br/>• lastNameField<br/>• zipCodeField<br/>• finishButton"]
+        end
+        
+        %% Support Layer
+        subgraph "🛠️ Support Layer"
+            COMMANDS["⚡ Custom Commands<br/>commands.ts<br/>• cy.login()<br/>• cy.addToCart()<br/>• cy.clearCart()"]
+            E2E_SETUP["🔧 Global Setup<br/>e2e.ts<br/>• Import commands<br/>• Global hooks<br/>• Configuration"]
+        end
+        
+        %% Utility Layer
+        subgraph "🔧 Utility Layer"
+            TEST_HELPER["📊 TestDataHelper.ts<br/>• User management<br/>• Data validation<br/>• Test scenarios"]
+            MOCK_HELPER["🎭 MockDataHelper.ts<br/>• API interception<br/>• Mock responses<br/>• Network simulation"]
+        end
+        
+        %% Data Layer
+        subgraph "📊 Data Layer"
+            USER_DATA["👥 users.json<br/>• Standard user<br/>• Locked user<br/>• Problem user"]
+            PRODUCT_DATA["🛍️ products.json<br/>• Product mock data<br/>• Scenarios"]
+            CART_DATA["🛒 cart.json<br/>• Cart mock data<br/>• State scenarios"]
+            API_DATA["📡 api-responses.json<br/>• API mocks<br/>• Response templates"]
+        end
+        
+        %% Configuration Layer
+        subgraph "⚙️ Configuration Layer"
+            CYPRESS_CONFIG["🔧 cypress.config.ts<br/>• Base URL<br/>• Browser settings<br/>• Timeouts<br/>• Viewports"]
+            TS_CONFIG["🔧 tsconfig.json<br/>• TypeScript config<br/>• Type definitions<br/>• Path mappings"]
+            PACKAGE_JSON["📦 package.json<br/>• Dependencies<br/>• 47+ NPM scripts<br/>• Project metadata"]
+        end
+        
+        %% Execution Flow
+        subgraph "🚀 Execution Flow"
+            RUNNER["🎮 Cypress Runner<br/>• Interactive mode<br/>• Headless mode<br/>• Cross-browser"]
+            REPORTS["📊 Test Reports<br/>• Screenshots<br/>• Videos<br/>• Detailed logs"]
+        end
+        
+        %% Application Under Test
+        subgraph "🎯 Application Under Test"
+            SAUCEDEMO["🌐 SauceDemo Website<br/>https://saucedemo.com<br/>• Login page<br/>• Products page<br/>• Cart page<br/>• Checkout page"]
+        end
+    end
+    
+    %% Relationships - Test Layer to Page Objects
+    AUTH --> LOGIN_PAGE
+    AUTH --> PRODUCTS_PAGE
+    PRODUCTS --> PRODUCTS_PAGE
+    CART --> CART_PAGE
+    CART --> PRODUCTS_PAGE
+    CHECKOUT --> CHECKOUT_PAGE
+    WORKFLOWS --> LOGIN_PAGE
+    WORKFLOWS --> PRODUCTS_PAGE
+    WORKFLOWS --> CART_PAGE
+    WORKFLOWS --> CHECKOUT_PAGE
+    MOCK --> MOCK_HELPER
+    
+    %% Page Objects to Selectors
+    LOGIN_PAGE --> LOGIN_SEL
+    PRODUCTS_PAGE --> PRODUCTS_SEL
+    CART_PAGE --> CART_SEL
+    CHECKOUT_PAGE --> CHECKOUT_SEL
+    
+    %% Support Layer Usage
+    AUTH --> COMMANDS
+    PRODUCTS --> COMMANDS
+    CART --> COMMANDS
+    CHECKOUT --> COMMANDS
+    WORKFLOWS --> COMMANDS
+    
+    %% Utility Layer Usage
+    AUTH --> TEST_HELPER
+    PRODUCTS --> TEST_HELPER
+    CART --> TEST_HELPER
+    CHECKOUT --> TEST_HELPER
+    WORKFLOWS --> TEST_HELPER
+    MOCK --> MOCK_HELPER
+    
+    %% Data Layer Usage
+    AUTH --> USER_DATA
+    PRODUCTS --> PRODUCT_DATA
+    CART --> CART_DATA
+    MOCK --> API_DATA
+    
+    %% Configuration Usage
+    RUNNER --> CYPRESS_CONFIG
+    RUNNER --> TS_CONFIG
+    RUNNER --> PACKAGE_JSON
+    
+    %% Execution Flow
+    RUNNER --> AUTH
+    RUNNER --> PRODUCTS
+    RUNNER --> CART
+    RUNNER --> CHECKOUT
+    RUNNER --> WORKFLOWS
+    RUNNER --> MOCK
+    RUNNER --> REPORTS
+    
+    %% Application Interaction
+    LOGIN_PAGE --> SAUCEDEMO
+    PRODUCTS_PAGE --> SAUCEDEMO
+    CART_PAGE --> SAUCEDEMO
+    CHECKOUT_PAGE --> SAUCEDEMO
+    
+    %% Setup Dependencies
+    E2E_SETUP --> COMMANDS
+    E2E_SETUP --> CYPRESS_CONFIG
+    
+    %% Styling
+    classDef testLayer fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+    classDef pageLayer fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef selectorLayer fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef supportLayer fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef utilityLayer fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef dataLayer fill:#e0f2f1,stroke:#00695c,stroke-width:2px
+    classDef configLayer fill:#f1f8e9,stroke:#558b2f,stroke-width:2px
+    classDef executionLayer fill:#e8eaf6,stroke:#303f9f,stroke-width:2px
+    classDef appLayer fill:#fff8e1,stroke:#ff8f00,stroke-width:2px
+    
+    class AUTH,PRODUCTS,CART,CHECKOUT,WORKFLOWS,MOCK testLayer
+    class LOGIN_PAGE,PRODUCTS_PAGE,CART_PAGE,CHECKOUT_PAGE pageLayer
+    class LOGIN_SEL,PRODUCTS_SEL,CART_SEL,CHECKOUT_SEL selectorLayer
+    class COMMANDS,E2E_SETUP supportLayer
+    class TEST_HELPER,MOCK_HELPER utilityLayer
+    class USER_DATA,PRODUCT_DATA,CART_DATA,API_DATA dataLayer
+    class CYPRESS_CONFIG,TS_CONFIG,PACKAGE_JSON configLayer
+    class RUNNER,REPORTS executionLayer
+    class SAUCEDEMO appLayer
+```
+
+### 🎯 **Architecture Layers Explained**
+
+| Layer | Purpose | Components | Responsibilities |
+|-------|---------|------------|------------------|
+| **🎯 Test Layer** | Test specifications and scenarios | 6 test categories | Define test cases, assertions, and workflows |
+| **📄 Page Object Model Layer** | Page interactions and methods | 4 page objects | Encapsulate page-specific logic and interactions |
+| **🎯 Selector Layer** | UI element selectors | 4 selector files | Centralize and maintain UI element selectors |
+| **🛠️ Support Layer** | Framework support and utilities | Custom commands, global setup | Provide reusable functions and global configuration |
+| **🔧 Utility Layer** | Helper functions and utilities | Test data helper, mock data helper | Manage test data and mock responses |
+| **📊 Data Layer** | Test data and fixtures | JSON fixture files | Store test data, user credentials, and mock responses |
+| **⚙️ Configuration Layer** | Framework configuration | Config files | Define Cypress, TypeScript, and project settings |
+| **🚀 Execution Layer** | Test execution and reporting | Cypress runner, reports | Execute tests and generate reports |
+| **🎯 Application Under Test** | Target application | SauceDemo website | The web application being tested |
+
+### 🔄 **Data Flow & Relationships**
+
+1. **Test Execution Flow**: Tests → Page Objects → Selectors → Application
+2. **Support Integration**: Tests → Custom Commands → Global Setup
+3. **Data Management**: Tests → Utilities → Fixtures → Test Data
+4. **Configuration**: Runner → Configuration Files → Test Environment
+5. **Reporting**: Execution → Screenshots/Videos → Test Reports
+
+### 🏗️ **Key Architectural Benefits**
+
+- **🎯 Separation of Concerns**: Each layer has a specific responsibility
+- **🔄 Reusability**: Page objects and utilities can be reused across tests
+- **🛠️ Maintainability**: Centralized selectors and configuration
+- **📊 Scalability**: Easy to add new tests, pages, and utilities
+- **🧪 Type Safety**: Full TypeScript integration across all layers
+- **🎭 Flexibility**: Mock data support for offline testing
+- **📈 Extensibility**: Modular design supports future enhancements
+
 ## 📁 Complete Project Structure
 
 ```
