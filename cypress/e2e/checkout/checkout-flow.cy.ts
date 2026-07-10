@@ -93,16 +93,19 @@ describe('Checkout Flow Tests', () => {
 
   it('should allow canceling checkout from step two', () => {
     checkoutPage.validateCheckoutStepOneIsDisplayed()
-    
+
     // Complete step one
     checkoutPage.fillCheckoutInformation('John', 'Doe', '12345')
-    
+
     // Cancel from step two
     checkoutPage.validateCheckoutStepTwoIsDisplayed()
-    checkoutPage.clickCancel()
-    
-    // Verify return to cart
-    cartPage.validateCartPageIsDisplayed()
+    checkoutPage.clickCancelStep2()
+
+    // Canceling from step two returns to the products page (not the cart),
+    // and the cart contents are kept
+    cy.url().should('include', '/inventory.html')
+    productsPage.validateProductsPageIsDisplayed()
+    productsPage.validateCartItemCount(1)
   })
 
   it('should display correct order summary', () => {

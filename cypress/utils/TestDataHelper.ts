@@ -80,7 +80,7 @@ export class TestDataHelper {
 
   // Environment utilities
   static getBaseUrl(): string {
-    return Cypress.env('baseUrl') || 'https://www.saucedemo.com'
+    return Cypress.config('baseUrl') || 'https://www.saucedemo.com'
   }
 
   static getBrowserName(): string {

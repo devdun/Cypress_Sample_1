@@ -316,7 +316,7 @@ CYPRESS_DEVDUN/
 ## 🛠️ Installation
 
 ### Prerequisites
-- Node.js (v16 or higher)
+- Node.js 22.x, 24.x, or 26+ (required by Cypress 16)
 - npm or yarn
 
 ### Setup

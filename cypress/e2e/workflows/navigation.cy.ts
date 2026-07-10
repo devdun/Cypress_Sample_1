@@ -4,6 +4,7 @@ import { LoginPage } from '../../pages/LoginPage'
 import { ProductsPage } from '../../pages/ProductsPage'
 import { CartPage } from '../../pages/CartPage'
 import { CheckoutPage } from '../../pages/CheckoutPage'
+import { CartPageSelectors } from '../../pages/selectors/CartPageSelectors'
 
 describe('Navigation and Menu Tests', () => {
   let loginPage: LoginPage
@@ -74,44 +75,25 @@ describe('Navigation and Menu Tests', () => {
       // Add item to cart first to avoid empty cart issues
       productsPage.addItemToCart('sauce-labs-backpack')
       
-      // Navigate directly to cart (try different possible URLs)
+      // SauceDemo is a single-page app on GitHub Pages: deep links return a 404
+      // page that redirects into the app, which then renders the route. So allow
+      // the 404 and rely on retrying assertions to wait for the app to render.
+      // The session cookie keeps the user logged in and the cart persists.
       cy.visit('/cart.html', { failOnStatusCode: false })
-      cy.get('body').then(($body) => {
-        if ($body.find('[data-test="cart-list"]').length > 0) {
-          cartPage.validateCartPageIsDisplayed()
-                 } else {
-           // If cart.html doesn't work, navigate through the UI
-           cy.visit('/')
-           productsPage.clickShoppingCart()
-           cartPage.validateCartPageIsDisplayed()
-         }
-      })
-      
-      // Navigate directly to checkout 
+      cy.url().should('include', '/cart.html')
+      cy.get(CartPageSelectors.cartItems).should('have.length', 1)
+      cy.get(CartPageSelectors.cartItemNames).should('contain.text', 'Sauce Labs Backpack')
+
+      // Navigate directly to checkout
       cy.visit('/checkout-step-one.html', { failOnStatusCode: false })
-      cy.get('body').then(($body) => {
-        if ($body.find('[data-test="checkout-info-container"]').length > 0) {
-          checkoutPage.validateCheckoutStepOneIsDisplayed()
-                 } else {
-           // If direct navigation doesn't work, use UI navigation
-           cy.visit('/')
-           productsPage.clickShoppingCart()
-           cartPage.clickCheckout()
-           checkoutPage.validateCheckoutStepOneIsDisplayed()
-         }
-      })
-      
-              // Navigate back to products
-        cy.visit('/inventory.html', { failOnStatusCode: false })
-        cy.get('body').then(($body) => {
-          if ($body.find('[data-test="inventory-container"]').length > 0) {
-            productsPage.validateProductsPageIsDisplayed()
-          } else {
-            // If direct navigation doesn't work, use base URL
-            cy.visit('/')
-            productsPage.validateProductsPageIsDisplayed()
-          }
-        })
+      cy.url().should('include', '/checkout-step-one.html')
+      checkoutPage.validateCheckoutStepOneIsDisplayed()
+
+      // Navigate directly back to products
+      cy.visit('/inventory.html', { failOnStatusCode: false })
+      cy.url().should('include', '/inventory.html')
+      productsPage.validateProductsPageIsDisplayed()
+      productsPage.validateCartItemCount(1)
     })
   })
 
